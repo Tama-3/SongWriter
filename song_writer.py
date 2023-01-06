@@ -29,7 +29,6 @@ def write_lyric(title, api_key):
     prompt = f'「{title}」をタイトルとした日本語の歌詞を考えてください。'
     lyric = openai.Completion.create(
         engine='text-davinci-003', prompt=prompt, max_tokens=1024, temperature=0.8)['choices'][0]['text']
-
     return lyric
 
 
