@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<META http-equiv="Refresh" content="1;URL=making_song">
+{% endblock %}
+
+{% block contents %}
+<div class="container text-center">
+  <div class="spinner-border text-warning" role="status">
+    <span class="sr-only">Waiting...</span>
+  </div>
+  <span>曲を作成中</span>
+  <div class="spinner-border text-warning" role="status">
+    <span class="sr-only">Waiting...</span>
+  </div>
+  <div class="card" text-center>
+    <div class="card-body">
+      <h3 class="card-title">「{{ title }}」</h3>
+      {% for row in lyric %}
+        <p class="card-text">{{ row }}</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

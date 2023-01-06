@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<div class="container text-center">
+  <button type="button" class="btn btn-link btn-lg" onclick="location.href='{{ song_url }}'">楽曲へのリンク</button>
+  <div class="card" text-center>
+    <div class="card-body">
+      <h3 class="card-title">「{{ title }}」</h3>
+      {% for row in lyric %}
+        <p class="card-text">{{ row }}</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
