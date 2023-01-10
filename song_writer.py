@@ -18,9 +18,7 @@ def get_trendword():
     trend_url = 'https://twittrend.jp/'
     res = requests.get(trend_url)
     soup = BeautifulSoup(res.text, 'html.parser')
-    element = soup.select(
-        '#now > div:nth-child(1) > div:nth-child(2) > ul:nth-child(1) > li:nth-child(1) > p:nth-child(1) > a:nth-child(2)'
-    )[0]
+    element = soup.select('#nav-trend-now > ul > li:nth-child(1) > p.ps-2.mb-0.mt-1.lh-sm > a')[0]
     return element.contents[0][1:] if element.contents[0][0] == '#' else element.contents[0]
 
 
