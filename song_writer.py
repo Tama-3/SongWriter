@@ -100,8 +100,6 @@ def make_song(title, lyric, **manual):
             (By.XPATH, '/html/body/div[1]/div/div/div[4]/div/div[1]/div/div[2]/button[2]/span[1]'))).click()
 
     time.sleep(5)
-    # song_id = driver.current_url[driver.current_url.rfind('/')+1:driver.current_url.find('?')]
-    # mp3_url = 'https://creevo-music.com/api/static/project_' + song_id + '.mp3'
     try:
         WebDriverWait(driver, 300).until(EC.visibility_of_element_located(
             (By.XPATH, '/html/body/div[1]/div/header/div/div/div[1]/div/div[1]/span/label[10]'))).click()

@@ -1,16 +1,17 @@
 from flask import Flask, render_template, request, url_for, redirect, session
-from song_writer import *
+import song_writer
+import settings
 import os
 
 app = Flask(__name__)
 
-API_KEY = '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'
-app.secret_key = b'5#y2L"F4Q8z\n\xec]/'
+API_KEY = settings.AP  # OPEN AI API KEY
+app.secret_key = b'secret_key'
 
 
 @app.route('/')
 def index():
-    session['title'] = get_trendword()
+    session['title'] = song_writer.get_trendword()
     return render_template('index.html', keyword=session['title'])
 
 
@@ -22,7 +23,7 @@ def waiting_lyric():
 
 @app.route('/writing_lyric')
 def writing_lyric():
-    session['lyric'] = write_lyric(title=session['title'], api_key=API_KEY)
+    session['lyric'] = song_writer.write_lyric(title=session['title'], api_key=API_KEY)
     return redirect(url_for('waiting_song'))
 
 
@@ -34,7 +35,7 @@ def waiting_song():
 @app.route('/making_song')
 def making_song():
     manual = {}
-    session['song_url'] = make_song(title=session['title'], lyric=session['lyric'], **manual)
+    session['song_url'] = song_writer.make_song(title=session['title'], lyric=session['lyric'], **manual)
     return redirect(url_for('finished_page'))
 
 
