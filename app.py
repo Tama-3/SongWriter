@@ -5,6 +5,9 @@ import os
 
 app = Flask(__name__)
 
+for key in os.environ:
+    val = os.environ[key]
+    print('{}: {}'.format(key, val))
 # API_KEY = settings.AP  # ローカル環境
 API_KEY = os.getenv('OPEN_AI_API_KEY')
 app.secret_key = b'secret_key'
