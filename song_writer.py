@@ -116,5 +116,5 @@ def make_song_in_aws(title, lyric):
         "title": title,
         "lyric": lyric
     }
-    res = requests.post(aws_lambda, data=json.dumps(data))
+    res = requests.post(aws_lambda, params=data)
     return res
