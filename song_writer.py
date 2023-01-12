@@ -31,9 +31,11 @@ def write_lyric(title, api_key):
 
 
 def make_song(title, lyric, **manual):
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    # options = webdriver.ChromeOptions()
+    # options.add_argument('--headless')
+    options = webdriver.FirefoxOptions()
+    # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options,)
     driver.implicitly_wait(7)
     driver.get('https://creevo-music.com/project')
     time.sleep(3)
