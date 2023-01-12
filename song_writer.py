@@ -3,6 +3,7 @@ import time
 import requests
 import re
 import jaconv
+import json
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
@@ -109,11 +110,11 @@ def make_song(title, lyric, **manual):
     return mp3_url
 
 
-    def make_song_in_aws(title, lyric):
-        aws_lambda = 'https://vpv6aagfv3nkioknnayrpsgtea0jbxhl.lambda-url.ap-northeast-1.on.aws/'
-        data = {
-            "title": title,
-            "lyric": lyric
-        }
-        res = requests.post(aws_lambda, data=json.dumps(data))
-        return res
+def make_song_in_aws(title, lyric):
+    aws_lambda = 'https://vpv6aagfv3nkioknnayrpsgtea0jbxhl.lambda-url.ap-northeast-1.on.aws/'
+    data = {
+        "title": title,
+        "lyric": lyric
+    }
+    res = requests.post(aws_lambda, data=json.dumps(data))
+    return res
