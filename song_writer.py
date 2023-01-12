@@ -111,10 +111,7 @@ def make_song(title, lyric, **manual):
 
 
 def make_song_in_aws(title, lyric):
-    aws_lambda = 'https://vpv6aagfv3nkioknnayrpsgtea0jbxhl.lambda-url.ap-northeast-1.on.aws/'
-    data = {
-        "title": title,
-        "lyric": lyric
-    }
-    res = requests.post(aws_lambda, params=data)
-    return res
+    aws_lambda = 'https://vpv6aagfv3nkioknnayrpsgtea0jbxhl.lambda-url.ap-northeast-1.on.aws/?'
+    aws_lambda += f'title={title}&lyric={lyric}'
+    res = requests.get(aws_lambda)
+    return res.text
