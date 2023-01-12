@@ -31,11 +31,9 @@ def write_lyric(title, api_key):
 
 
 def make_song(title, lyric, **manual):
-    # options = webdriver.ChromeOptions()
-    # options.add_argument('--headless')
-    options = webdriver.FirefoxOptions()
-    # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options,)
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     driver.implicitly_wait(7)
     driver.get('https://creevo-music.com/project')
     time.sleep(3)
@@ -109,3 +107,13 @@ def make_song(title, lyric, **manual):
     driver.quit()
 
     return mp3_url
+
+
+    def make_song_in_aws(title, lyric):
+        aws_lambda = 'https://vpv6aagfv3nkioknnayrpsgtea0jbxhl.lambda-url.ap-northeast-1.on.aws/'
+        data = {
+            "title": title,
+            "lyric": lyric
+        }
+        res = requests.post(aws_lambda, data=json.dumps(data))
+        return res

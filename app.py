@@ -36,7 +36,8 @@ def waiting_song():
 @app.route('/making_song')
 def making_song():
     manual = {}
-    session['song_url'] = song_writer.make_song(title=session['title'], lyric=session['lyric'], **manual)
+    # session['song_url'] = song_writer.make_song(title=session['title'], lyric=session['lyric'], **manual)
+    session['song_url'] = song_writer.make_song_in_aws(title=session['title'], lyric=session['lyric'])
     return redirect(url_for('finished_page'))
 
 
