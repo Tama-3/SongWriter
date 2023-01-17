@@ -19,7 +19,7 @@ def get_trendword():
     trend_url = 'https://twittrend.jp/'
     res = requests.get(trend_url)
     soup = BeautifulSoup(res.text, 'html.parser')
-    element = soup.select('#now > div.box.box-solid > div.box-body > ul > li:nth-child(1) > p.trend > a')[0]
+    element = soup.select('#now > div.card.card-outline > div.card-body > ul > li:nth-child(1) > p.trend > a')[0]
     return element.contents[0][1:] if element.contents[0][0] == '#' else element.contents[0]
 
 
@@ -39,13 +39,14 @@ def make_song(title, lyric, **manual):
     driver.get('https://creevo-music.com/project')
     time.sleep(3)
     # 歌詞変換
-    processed_lyric = jaconv.kata2hira(re.sub('Verse ?\d?|Chorus|Bridge', "", lyric).lstrip())
+    processed_lyric = jaconv.kata2hira(re.sub('Verse ?\d?|Chorus|Bridge|[a-zA-Z]|\s', "", lyric).lstrip())
+    processed_lyric = processed_lyric.replace('ヴァ', 'バ').replace('ヴィ', 'ビ').replace('ヴェ', 'ベ').replace('ヴォ', 'ボ')
     driver.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/textarea').send_keys(processed_lyric)
     driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/button/span[1]').click()
     time.sleep(3)
     # 12小節まで削減
     yomigana = driver.find_element_by_xpath(
-        '/html/body/div[1]/div/div[5]/div/div/textarea').text.replace('\n', '').replace(' ', '　')
+        '/html/body/div[1]/div/div[5]/div/div/textarea').text.replace(' ', '　')
     if len(yomigana.split('　')) > 12:
         yomigana = '　'.join(yomigana.split('　')[:12])
         driver.find_element_by_xpath(
