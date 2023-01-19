@@ -21,7 +21,7 @@ def get_trendword():
     soup = BeautifulSoup(res.text, 'html.parser')
     try:
         element = soup.select('#now > div.card.card-outline > div.card-body > ul > li:nth-child(1) > p.trend > a')[0]
-    except
+    except:
         element = soup.select('#now > div.box.box-solid > div.box-body > ul > li:nth-child(1) > p.trend > a')[0]
     return element.contents[0][1:] if element.contents[0][0] == '#' else element.contents[0]
 
