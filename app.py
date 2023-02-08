@@ -12,7 +12,10 @@ app.secret_key = b'secret_key'
 
 @app.route('/')
 def index():
-    session['title'] = song_writer.get_trendword()
+    try:
+        session['title'] = song_writer.get_trendword()
+    except:
+        session['title'] = '水曜日のダウンタウン'
     return render_template('index.html', keyword=session['title'])
 
 
